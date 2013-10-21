@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<acl>
+    <resources>
+        <r0001 resource="default:auth" />
+        <r0002 resource="default:index" />
+        <r0003 resource="default:error" />
+    </resources>
+    <roles>
+        <r0001 role="guest" />
+        <r0002 role="registered" inherit="guest" />
+        <r0003 role="administrator"  inherit="registered" />
+    </roles>
+    <allow>
+        <a0001 role="guest" resource="default:auth" privileges="logout,registrar,request-password" />
+        <a0002 role="guest" resource="default:index" />
+        <a0003 role="guest" resource="default:error" />
+    </allow>
+</acl>

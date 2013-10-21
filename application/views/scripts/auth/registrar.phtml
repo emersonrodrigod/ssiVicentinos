@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MyControl</title>
+        <link rel="stylesheet" type="text/css" href="/home/css/style.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body class="en None gecko" style="min-height: 649px;">
+        <div id="outer-frame">
+            <div id="page-header">
+
+            </div> 
+            <div class="" id="page-logo-header">
+                <div id="header-border-div"></div>
+            </div> 
+            <?php
+            if ($this->messagem)
+                echo $this->messagem;
+            ?>
+            <div id="register-container">
+                <div class="splash">
+                    <img style="width: 504px; height: 256px; margin-top: 0; border-right-width: 0px; margin-left: 0px;" alt="Funcionalidades" src="/home/img/functions.png">
+                </div>
+                <?php echo $this->form; ?>
+            </div>
+            <div id="more-help">
+                Copyright &copy; 2012 - 2013 MyControl. Todos os direitos reservados.
+            </div>
+    </div><!--[if IE]><iframe onload="on_script_loaded(function() { HashKeeper.reloading=false; });" style="display: none" name="hashkeeper" src="/home/img//blank" height="1" width="1" id="hashkeeper"></iframe><![endif]-->
+    </body>
+</html>
