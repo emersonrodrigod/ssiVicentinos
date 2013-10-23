@@ -7,12 +7,11 @@
     </resources>
     <roles>
         <r0001 role="guest" />
-        <r0002 role="registered" inherit="guest" />
-        <r0003 role="administrator"  inherit="registered" />
+        <r0002 role="usuario" inherit="guest" />
+        <r0003 role="admin"  inherit="usuario" />
     </roles>
     <allow>
         <a0001 role="guest" resource="default:auth" privileges="logout,registrar,request-password" />
-        <a0002 role="guest" resource="default:index" />
-        <a0003 role="guest" resource="default:error" />
+        <a0002 role="admin" resource="default:index"/>
     </allow>
 </acl>

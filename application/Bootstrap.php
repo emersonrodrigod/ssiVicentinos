@@ -16,10 +16,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     }
 
     public function _initActionControlList() {
-        if (Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session("registered"))->hasIdentity()) {
+        if (Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session("usuario"))->hasIdentity()) {
             Zend_Registry::set('role', Zend_Auth::getInstance()
-                            ->setStorage(new Zend_Auth_Storage_Session("registered"))
-                            ->getStorage()->read()->getRole());
+                            ->setStorage(new Zend_Auth_Storage_Session("usuario"))
+                            ->getStorage()->read()->role);
         }
         else
             Zend_Registry::set('role', 'guest');

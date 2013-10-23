@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Description of AuthController
- *
- * @author Anterio
- */
 class AuthController extends Zend_Controller_Action {
 
     public function init() {
@@ -12,89 +7,32 @@ class AuthController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        $idUser = $this->getRequest()->getParam('act', null);
         $this->_helper->layout()->disableLayout();
-     
 
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
 
-
             $authAdapter = $this->getAuthAdapter();
             $authAdapter->setIdentity($data ['email'])
-                    ->setCredential($data ['password']);
+                    ->setCredential($data ['senha']);
 
             $result = $authAdapter->authenticate();
 
             if ($result->isValid()) {
                 $auth = Zend_Auth::getInstance();
-                $auth->setStorage(new Zend_Auth_Storage_Session('registered'));
-                $dataAuth = $authAdapter->getResultRowObject(null, 'password');
-                $userAuht = $user->find($dataAuth->id);
-                $userAuht->setLast_accessed(Zend_Date::now()->get('yyyy-MM-dd HH:mm:ss', 'pt_BR'));
-                $userAuht->save();
+                $auth->setStorage(new Zend_Auth_Storage_Session('usuario'));
+                $dataAuth = $authAdapter->getResultRowObject(null, 'senha');
 
-                $auth->getStorage()->write($userAuht);
-                $this->_redirect("/index/visao-geral");
+                $auth->getStorage()->write($dataAuth);
+                $this->_redirect("/");
             } else {
-                $this->view->messagem = '<div class="alert" style="margin-bottom: 0;"> Usuário ou senha incorretos!</div>';
+                $this->view->messagem = '<div class="alert alert-error" style="margin-bottom: 0;"> Usuário ou senha incorretos!</div><br/>';
             }
         }
     }
 
     public function requestPasswordAction() {
         $this->_helper->layout()->disableLayout();
-        $this->_redirect('/auth');
-    }
-
-    public function registrarAction() {
-
-        $this->_helper->layout()->disableLayout();
-
-        $categoryMapper = new Category();
-        $account = new Account();
-        $form = new Form_Registration();
-        $userMapper = new User();
-
-        if ($this->getRequest()->isPost()) {
-            $data = $this->getRequest()->getPost();
-            if ($form->isValid($data)) {
-                $data['role'] = 'registered';
-                $data['active'] = 1;
-                $userMapper->setOptions($data);
-
-                /** Inicia transação */
-                Zend_Db_Table::getDefaultAdapter()->beginTransaction();
-                try {
-
-                    $userId = $userMapper->save();
-
-                    $idAccount = $account->setName('Conta Inicial')
-                            ->setUsers_id($userId)
-                            ->save();
-
-                    $categoryMapper->setName('Outros')
-                            ->setColor('#40850a')
-                            ->setActive(1)
-                            ->setAccounts_id($idAccount)
-                            ->save();
-
-                    /** Comita transação */
-                    Zend_Db_Table::getDefaultAdapter()->commit();
-                    $this->_redirect('/auth/index/act/' . $userId);
-                    return true;
-                } catch (Exception $exc) {
-                    /** Desfaz transação */
-                    Zend_Db_Table::getDefaultAdapter()->rollBack();
-                    $this->view->messagem = '<div class="alert alert-error">' . $exc->getMessage() . '</div>';
-                }
-            } else {
-                $form->populate($data);
-            }
-            $this->_redirect('/auth/index/box/reg');
-        }
-
-        $this->view->form = $form;
     }
 
     private function getAuthAdapter() {
@@ -103,16 +41,16 @@ class AuthController extends Zend_Controller_Action {
 
         $db = $resource->getDbAdapter();
         $authAdapter = new Zend_Auth_Adapter_DbTable($db);
-        $authAdapter->setTableName('users')
+        $authAdapter->setTableName('usuario')
                 ->setIdentityColumn('email')
-                ->setCredentialColumn('password')
+                ->setCredentialColumn('senha')
                 ->setCredentialTreatment('SHA1(?)');
         return $authAdapter;
     }
 
     public function logoutAction() {
         $auth = Zend_Auth::getInstance();
-        $auth->setStorage(new Zend_Auth_Storage_Session('registered'));
+        $auth->setStorage(new Zend_Auth_Storage_Session('usuario'));
         $auth->clearIdentity();
         $this->_redirect("/auth");
     }
