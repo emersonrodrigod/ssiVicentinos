@@ -8,47 +8,56 @@
             <ul class="nav nav-list">
                 <li class="nav-header"><i class="icon-cogs"></i> Preferências</li>
                 <li class="active">
-                    <a href="/configuracoes">Informações do Psicólogo</a>
+                    <a href="/index/configuracoes">Meus Dados</a>
                 </li>
-                <li class="">
-                    <a href="/configuracoes/sessao">Sessão</a>
+                <li>
+                    <a href="/empresas">Cadastro de Empresas</a>
                 </li> 
-                <li class=""><a href="#">Pagamentos do Sistema</a></li>
+                <li>
+                    <a href="/tipos-ssi">Tipos de Solicitação</a>
+                </li>
+                <li>
+                    <a href="/usuarios">Usuários</a>
+                </li>
+                <li>
+                    <a href="/logacessos">Logs de Acessos</a>
+                </li>
+                <li>
+                    <a href="/auth/senha">Alterar minha senha</a>
+                </li>
             </ul>    
-        </div>  </div>
+        </div>  
+    </div>
+
     <div class="span9">
 
-        <form action="/configuracoes/salvarperfil" method="post" name="cliente" class="form-horizontal" id="cliente"><input type="hidden" name="idpsicologos" value="63">
+        <form method="post" class="form-horizontal" id="perfil">
+
+            <input type="hidden" name="id" value="63">
+
             <div class="well">
 
-                <h4>Informações do Psicólogo</h4>
+                <h4>Informações do Usuário</h4>
                 <hr>
 
                 <div class="control-group">
-                    <label class="control-label"><label for="nome">Nome Completo</label></label>
+                    <label class="control-label">
+                        <label for="nome">Nome Completo</label>
+                    </label>
+
                     <div class="controls">
-                        <input type="text" name="nome" class="input-xlarge" value="">                  </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label"><label for="email">E-mail</label></label>
-                    <div class="controls">
-                        <input type="email" name="email" class="input-xlarge" value="emersonrodrigod@gmail.com">                  </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Documentos</label>
-                    <div class="controls">
-                        <input type="text" name="cpf" class="input-medium" placeholder="CPF" data-toggle="tooltip" title="CPF" value="">          <input type="text" name="rg" class="input-medium" placeholder="RG" data-toggle="tooltip" title="RG" value="">
+                        <input type="text" name="nome" class="input-xlarge">                  
                     </div>
                 </div>
+
                 <div class="control-group">
-                    <label class="control-label"><label for="nascimento">Data de Nascimento</label></label>
+                    <label class="control-label">
+                        <label for="email">E-mail</label>
+                    </label>
+
                     <div class="controls">
-                        <input type="text" name="nascimento" class="input-small datepicker" data-date-format="dd/mm/yyyy" data-toggle="datepicker" data-language="pt-BR" data-date-viewmode="years" value="">                  </div>
-                </div>      
-                <div class="control-group">
-                    <label class="control-label"><label for="crp">CRP</label></label>
-                    <div class="controls">
-                        <input type="text" name="crp" class="input-small" maxlength="14" value="">                  </div>
+                        <input type="email" name="email" class="input-xlarge" >                  
+                    </div>
                 </div>
 
                 <hr>
@@ -56,33 +65,31 @@
                 <div class="control-group">
                     <label class="control-label">Telefones</label>
                     <div class="controls">
-                        <input type="text" name="telefone_celular" class="input-medium tel" placeholder="Celular" data-toggle="tooltip" title="Telefone Celular" value="">          <input type="text" name="telefone_comercial" class="input-medium tel" placeholder="Comercial" data-toggle="tooltip" title="Telefone Comercial" value="">
+                        <input type="text" name="telefone" class="input-medium tel" placeholder="Telefone" data-toggle="tooltip" title="Telefone" value="">          
+                        <input type="text" name="ramal" class="input-small" placeholder="ramal" data-toggle="tooltip" title="ramal" value="">
                     </div>
                 </div>    
 
                 <hr>
 
-                <div class="control-group">
-                    <label class="control-label"><label for="cep">CEP</label></label>
-                    <div class="controls">
-                        <input type="text" name="cep" class="input-small" onkeyup="getEndereco(this)" maxlength="8" value="">                  </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label"><label for="endereco">Endereço</label></label>
-                    <div class="controls">
-                        <input type="text" name="endereco" placeholder="Logradouro" data-toggle="tooltip" title="Logradouro" value="">          <input type="text" name="numero" class="input-mini" placeholder="Número" data-toggle="tooltip" title="Número" value="">          <input type="text" name="complemento" class="input-small" placeholder="Compl." data-toggle="tooltip" title="Complemento" value="">          <input type="text" name="bairro" class="span4" placeholder="Bairro" data-toggle="tooltip" title="Bairro" value="">
-                    </div>
-                    <div class="controls" style="margin-top:10px;">
-                        <input type="text" name="uf" class="span2" id="uf" value="">          <input type="text" name="cidade" id="cidade" value="">          
-                    </div>
-                </div>
-
                 <div class="form-actions">
-                    <input type="submit" name="submit" id="submitbutton" class="btn btn-success" value="Salvar">        <a href="/cliente" class="btn">Cancelar</a>
+                    <input type="submit" name="submit" id="submitbutton" class="btn btn-success" value="Salvar">        
+                    <a href="/" class="btn">Cancelar</a>
                 </div>
 
         </form>
+        <script type="text/javascript">
+            $('#perfil').validate({
+                onkeyup: true,
+                rules: {
+                    email: {required: true, email:true},
+                    nome: {required: true}
+                }
+            });
+        </script>  
 
+
+        <!-- Script para estados e cidades 
         <script type="text/javascript">
                             cidadesEstados = new dgCidadesEstados({
                                 cidade: $('input[name=cidade]').get(0),
@@ -93,5 +100,6 @@
                             });
         </script>  
 
+        -->
     </div>
 </div>

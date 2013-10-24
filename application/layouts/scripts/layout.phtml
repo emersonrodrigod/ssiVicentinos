@@ -16,9 +16,29 @@
         <link href="/css/app.css" rel="stylesheet" media="screen">
 
         <!-- scripts -->
-        <script src="http://code.jquery.com/jquery.js"></script>
-        <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.ui.datepicker-pt-BR.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.0/fastclick.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.nicescroll.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="/js/modernizr.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.price.js"></script>
+        <script type="text/javascript" src="/js/jquery.inputmask.js"></script>
+        <script type="text/javascript" src="/js/jquery.inputmask.extensions.js"></script>
+        <script type="text/javascript" src="/js/cidades-uf.js"></script>
+        <script type="text/javascript" src="/js/fullcalendar.min.js"></script>
+        <script type="text/javascript" src="/lib/validation/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="/lib/validation/localization/messages_ptbr.js"></script>
+        <script type="text/javascript" src="/js/global.js"></script>
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/js/html5.js"></script>
+        <![endif]-->
+        <script type="text/javascript" src="/js/bootstrap-timepicker.js"></script>
+        <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="/js/bootstrap-datepicker.pt-BR.js"></script>
+        <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
     </head>
     <body>
 
@@ -55,8 +75,8 @@
                             </li>
                         </ul>
                         <ul class="nav pull-right">
-                            <li><a href="/configuracoes"><i class="icon-cog"></i> <br> Configurações</a></li>
-                            <!-- <li><a href="https://walbatroz.zendesk.com/categories/20127118-PsiControle" target="_blank"><i class="icon-question-sign"></i> <br> Ajuda</a></li> -->
+                            <li><a href="/index/configuracoes"><i class="icon-cog"></i> <br> Configurações</a></li>
+                            <li><a href="https://walbatroz.zendesk.com/categories/20127118-PsiControle" target="_blank"><i class="icon-question-sign"></i> <br> Ajuda</a></li>
                             <li class="divider-vertical"></li>
                             <li><a href="/auth/logout"><i class="icon-signout"></i> <br> Sair</a></li>
                         </ul>
@@ -68,9 +88,9 @@
         <div style="margin-top: 100px;" class="visible-desktop"></div>
 
         <div class="container">
-
+            <?php echo $this->flashMessenger(); ?>
+            
             <?php echo $this->layout()->content; ?>
-
 
             <br/>
             <footer>

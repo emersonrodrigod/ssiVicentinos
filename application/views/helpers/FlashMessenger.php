@@ -66,10 +66,9 @@ class Zend_View_Helper_FlashMessenger extends Zend_View_Helper_Abstract {
     public function flashMessenger($key = 'warning', $template = '<div class="alert alert-%s">%s</div>') {
         $flashMessenger = $this->_getFlashMessenger();
 
-        $rand = rand(11111, 99999);
-        $template = '<div id="' . $rand . '" class="sticky border-top-right st-%s" style="display: block;">';
-        $template .= '<span title="Close" rel="' . $rand . '" class="close st-close">×</span>';
-        $template .= '<div rel="' . $rand . '" class="sticky-note">%s</div>';
+        $template = '<div class="alert alert-%s">';
+        $template .= '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+        $template .= '%s';
         $template .= '</div>';
 
         //get messages from previous requests

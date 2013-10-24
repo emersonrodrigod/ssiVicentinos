@@ -4,6 +4,9 @@
         <r0001 resource="default:auth" />
         <r0002 resource="default:index" />
         <r0003 resource="default:error" />
+        <r0004 resource="default:configuracoes" />
+        <r0005 resource="default:empresas" />
+        <r0006 resource="default:tipos-ssi" />
     </resources>
     <roles>
         <r0001 role="guest" />
@@ -12,6 +15,9 @@
     </roles>
     <allow>
         <a0001 role="guest" resource="default:auth" privileges="logout,registrar,request-password" />
-        <a0002 role="admin" resource="default:index"/>
+        <a0002 role="admin" resource="default:index" />
+        <a0003 role="admin" resource="default:configuracoes" />
+        <a0004 role="admin" resource="default:empresas" />
+        <a0005 role="admin" resource="default:tipos-ssi" />
     </allow>
 </acl>

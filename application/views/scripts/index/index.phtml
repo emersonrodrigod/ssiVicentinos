@@ -1,4 +1,4 @@
-<div class="row-fluid hide">
+<div class="row-fluid">
     <div class="span6">
         <a href="/clientes/novo" class="btn btn-success"><i class="icon-user icon-2x"></i> <br> Novo Cliente</a>
         <a href="/tratamentos/novo" class="btn btn-success"><i class="icon-briefcase icon-2x"></i> <br> Novo Tratamento</a>
@@ -6,80 +6,4 @@
     </div>
 </div>
 
-<hr class="hide"/>
-
-<div class="row-fluid">
-    <div class="span12">
-        <h2><i class="icon-group"></i> Clientes</h2>
-
-        <hr>
-
-        <p><a href="/clientes/novo" class="btn btn-primary"><i class="icon-user"></i> &nbsp; Novo Cliente</a></p>
-
-        <table class="table table-hover dataTable">
-            <thead>
-                <tr>
-                    <th width="5%">Status</th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th width="10%">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="status status-inativo">
-                            <div class="hide">em-tratamento</div>
-                    </td>
-                    <td>
-                        <a href="/cliente/ver/9">Cliente de teste</a>
-                    </td>
-                    <td>emer.dario@hotmail.com</td>
-                    <td>(44) 4444-4444</td>
-                    <td>
-                        <a href="/cliente/form/9" class="btn btn-small"><i class="icon-edit"></i></a>
-                        <a href="" class="btn btn-danger btn-small"><i class="icon-remove-sign"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <script type="text/javascript">
-            $(function() {
-                var oTable = $('.dataTable').dataTable({
-                    "sPaginationType": "full_numbers",
-                    "sDom": 'f<"toolbar">lrtip',
-                    "oLanguage": {
-                        "sProcessing": "Processando...",
-                        "sLengthMenu": "Mostrar _MENU_ registros",
-                        "sZeroRecords": "Não foram encontrados resultados",
-                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                        "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
-                        "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
-                        "sInfoPostFix": "",
-                        "sSearch": "Buscar:",
-                        "sUrl": "",
-                        "oPaginate": {
-                            "sFirst": "Primeiro",
-                            "sPrevious": "Anterior",
-                            "sNext": "Seguinte",
-                            "sLast": "Último"
-                        }
-                    }
-                });
-
-                var select = '<select name="status">';
-                select += '<option value="">Todos</option>';
-                select += '<option value="em-tratamento">Em tratamento</option>';
-                select += '<option value="inativo">Inativo</option>';
-                select += '</select>';
-
-                $("div.toolbar").html('<label>Filtrar: ' + select + '</label>');
-
-                $('select[name=status]', this).change(function() {
-                    oTable.fnFilter($(this).val(), 0);
-                });
-            });
-        </script> 
-    </div>
-</div>
+<hr/>
