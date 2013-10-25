@@ -12,7 +12,7 @@
                     <th width="5%">#id</th>
                     <th>Nome</th>
                     <th width="10%">Situação</th>
-                    <th width="10%">&nbsp;</th>
+                    <th width="15%">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +23,7 @@
                         <td><?php echo ($empresa->ativo == 1 ? 'Ativo' : 'Inativo'); ?></td>
                         <td>
                             <a href="/empresas/editar/id/<?php echo $empresa->id; ?>" class="btn btn-small"><i class="icon-edit"></i></a>
+                            <a href="/empresas/departamentos/empresa/<?php echo $empresa->id; ?>" class="btn btn-small" title="Departamentos"><i class="icon-building"></i></a>
                             <a href="/empresas/remover/id/<?php echo $empresa->id; ?>" class="btn btn-danger btn-small delete"><i class="icon-remove-sign"></i></a>
                         </td>
                     </tr>

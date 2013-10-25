@@ -12,4 +12,15 @@ class Departamento extends Zend_Db_Table_Abstract {
         )
     );
 
+    public function acceptFromUserData($dados) {
+
+        $validadores = array(
+            'nome' => array(
+                'allowEmpty' => false
+            )
+        );
+
+        return new Zend_Filter_Input(array(), $validadores, $dados);
+    }
+
 }

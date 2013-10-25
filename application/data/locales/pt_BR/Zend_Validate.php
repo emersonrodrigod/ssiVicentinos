@@ -24,56 +24,6 @@
  * EN-Revision: 22075
  */
 return array(
-    
-    //Tradução do aplicativo
-    "CLICK_TO_EDIT_NOTIFICATION" => 'Clique para editar',
-    "FINANCIAL_TRANSACTIONS" => 'Movimentações',
-    // Menu
-    "CONTROL_PANEL" => 'Painel de controle',
-    "MYCONTROL" => 'MyControl',
-    "MENU_HOME" => 'Principal',
-    "MENU_FINANCIAL_TRANSACTIONS" => 'Movimentações',
-    "MENU_SETTINGS" => 'Configurações',
-    "MENU_HELP" => 'Ajuda',
-    "MENU_FINANCIAL_TRANSACTIONS" => 'Movimentações',
-    "MENU_ACCOUNTS_PAYABLE" => 'Contas a pagar',
-    "MENU_ACCOUNTS_RECEIVABLE" => 'Contas a receber',
-    "MENU_ACCOUNTS_EXTRACT" => 'Extrato',
-    "MENU_CALENDAR" => 'Agenda',
-    // Widgets
-    "WIDGET_BOX_NOTIFICARION" => 'Notificações',
-    "WIDGET_BOX_ADD_FAST" => 'Adicionar rápido',
-    "WIDGET_BOX_OVERVIEW" => 'Visão geral',
-    "WIDGET_BOX_CURRENT_BALANCE" => 'Saldo atual',
-    "WIDGET_BOX_FINANCIAL_TRANSACTIONS" => 'Movimentações',
-    "WIDGET_BOX_ACCOUNTS_PAYABLE" => 'Contas a pagar',
-    "WIDGET_BOX_ACCOUNTS_TO_RECEIVABLE" => 'Contas a receber',
-    "WIDGET_BOX_NO_BILL_TO_PAY" => 'Nenhuma conta a pagar',
-    "WIDGET_BOX_NO_ACCOUNTS_RECEIVABLE" => 'Nenhuma conta a receber',
-    "WIDGET_BOX_NO_TRANSACTION" => 'Nenhuma transação encontrada',
-    "WIDGET_BOX_ACCOUNTS_NO_PAY" => 'Constas não pagas',
-    "WIDGET_BOX_ACCOUNTS_PAY" => 'Constas pagas',
-    "WIDGET_BOX_ACCOUNTS_RECEIVABLE" => 'Contas recebidas',
-    "WIDGET_BOX_ACCOUNTS_NO_RECEIVABLE" => 'Contas não recebidas',
-    "WIDGET_BOX_TOTAL_ACCOUNTS_RECEIVABLE" => 'Total recebidas',
-    "WIDGET_BOX_TOTAL_ACCOUNTS_NO_RECEIVABLE" => 'Total não recebidas',
-    "WIDGET_TEXT_TOMORROW" => 'Amanhã',
-    "WIDGET_TEXT_TODAY" => 'Hoje',
-    "WIDGET_BOX_REPORTS" => 'Relatórios de Despesas',
-    "WIDGET_BOX_CALENDAR" => 'Resumo da Agenda',
-    "WIDGET_BOX_LOADING" => 'Carregando...',
-    // transactions received
-    "CLICK_TO_MARK_AS_NOT_RECEIVED" => 'Clique para marcar como não pago',
-    "CLICK_TO_MARK_AS_RECEIVED" => 'Clique para marcar como pago',
-    "DELETE_ACCOUNT" => 'Excluir conta',
-    // Transactions pay or no pay
-    "TEXT_NO_BACKWARD_MOVEMENT" => 'Não há movimentações atrasadas',
-    "WIDGET_BOX_ACCOUNTS_PAY" => 'Contas pagas',
-    "WIDGET_BOX_ACCOUNTS_NO_PAY" => 'Contas não pagas',
-    "WIDGET_BOX_TOTAL_ACCOUNTS_NO_PAY" => 'Total não pagas',
-    "WIDGET_BOX_TOTAL_ACCOUNTS_PAY" => 'Total pagas',
-    "CLICK_TO_MARK_AS_NOT_PAY" => 'Clique para marcar como não paga',
-    "CLICK_TO_MARK_AS_PAY" => 'Clique para marcar como paga',
     // Zend_Validate_Alnum
     "Invalid type given, value should be float, string, or integer" => "O tipo especificado é inválido, o valor deve ser float, string, ou inteiro",
     "'%value%' contains characters which are non alphabetic and no digits" => "'%value%' contém caracteres que não são alfabéticos e nem dígitos",
@@ -268,4 +218,5 @@ return array(
     "'%value%' is more than %max% characters long" => "O tamanho de '%value%' é superior a %max% caracteres",
     // by Plataformaweb
     "A record matching '%value%' was found" => "Já existe um registo com '%value%'",
+    "You must give a non-empty value for field '%value%'" => "Você precisa preencher o campo '%value%'"
 );

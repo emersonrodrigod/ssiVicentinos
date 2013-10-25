@@ -13,12 +13,21 @@ class TiposSsiController extends Zend_Controller_Action {
             $data = $this->_request->getPost();
             $tipo = new TipoSsi();
 
-            try {
-                $tipo->insert($data);
-                $this->_helper->flashMessenger(array('success' => 'Tipo de Solicitação gravada com sucesso!'));
-                $this->_redirect('/tipos-ssi');
-            } catch (Zend_Db_Exception $exc) {
-                $this->_helper->flashMessenger(array('error' => 'Desculpe, ocorreu um erro: ' . $exc->getMessage()));
+            if ($tipo->acceptFromUserData($data)->isValid()) {
+                try {
+                    $tipo->insert($data);
+                    $this->_helper->flashMessenger(array('success' => 'Tipo de Solicitação gravada com sucesso!'));
+                    $this->_redirect('/tipos-ssi');
+                } catch (Zend_Db_Exception $exc) {
+                    $this->_helper->flashMessenger(array('error' => 'Desculpe, ocorreu um erro: ' . $exc->getMessage()));
+                }
+            } else {
+
+                foreach ($tipo->acceptFromUserData($data)->getMessages() as $message) {
+                    foreach ($message as $m) {
+                        $this->_helper->flashMessenger(array('error' => $m));
+                    }
+                }
             }
         }
     }
@@ -31,13 +40,21 @@ class TiposSsiController extends Zend_Controller_Action {
         if ($this->_request->isPost()) {
 
             $data = $this->_request->getPost();
+            if ($tipo->acceptFromUserData($data)->isValid()) {
+                try {
+                    $tipo->update($data, "id = {$atual->id}");
+                    $this->_helper->flashMessenger(array('success' => 'Tipo de Solicitação atualizado com sucesso!'));
+                    $this->_redirect('/tipos-ssi');
+                } catch (Zend_Db_Exception $exc) {
+                    $this->_helper->flashMessenger(array('error' => 'Desculpe, ocorreu um erro: ' . $exc->getMessage()));
+                }
+            } else {
 
-            try {
-                $tipo->update($data, "id = {$atual->id}");
-                $this->_helper->flashMessenger(array('success' => 'Tipo de Solicitação atualizado com sucesso!'));
-                $this->_redirect('/tipos-ssi');
-            } catch (Zend_Db_Exception $exc) {
-                $this->_helper->flashMessenger(array('error' => 'Desculpe, ocorreu um erro: ' . $exc->getMessage()));
+                foreach ($tipo->acceptFromUserData($data)->getMessages() as $message) {
+                    foreach ($message as $m) {
+                        $this->_helper->flashMessenger(array('error' => $m));
+                    }
+                }
             }
         }
     }
