@@ -1,0 +1,38 @@
+<div class="row-fluid">
+    <h2>Novo Processo</h2>
+
+    <hr>
+
+    <form method="post" class="form-horizontal" id="processo">
+        <div class="row-fluid">
+            <div class="span1 txtCenter">
+                <i class="icon-gears icon-3x muted"></i>
+            </div>
+            <div class="span11">
+                <div class="control-group">
+                    <label class="control-label">
+                        <label for="nome">Nome</label>
+                    </label>
+                    <div class="controls">
+                        <input type="text" name="nome" class="input-xxlarge">							
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <input type="submit" id="submitbutton" class="btn btn-primary" value="Salvar">  
+            <a href="/processos" class="btn">Cancelar</a>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+        $('#processo').validate({
+            rules: {
+                nome: {required: true, minLenght: 2}
+            }
+        });
+    </script>  
+
+</div>

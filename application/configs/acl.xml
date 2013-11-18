@@ -7,6 +7,7 @@
         <r0004 resource="default:configuracoes" />
         <r0005 resource="default:empresas" />
         <r0006 resource="default:tipos-ssi" />
+        <r0007 resource="default:processos" />
     </resources>
     <roles>
         <r0001 role="guest" />
@@ -20,5 +21,6 @@
         <a0004 role="admin" resource="default:empresas" />
         <a0005 role="admin" resource="default:tipos-ssi" />
         <a0006 role="guest" resource="default:empresas" />
+        <a0007 role="admin" resource="default:processos" />
     </allow>
 </acl>

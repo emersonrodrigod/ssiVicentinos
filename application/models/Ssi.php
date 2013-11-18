@@ -19,6 +19,11 @@ class Ssi extends Zend_Db_Table_Abstract {
             'refTableClass' => 'Usuario',
             'refColumns' => array('id'),
             'columns' => array('id_responsavel')
+        ),
+        'Processo' => array(
+            'refTableClass' => 'Processo',
+            'refColumns' => array('id'),
+            'columns' => array('id_processo')
         )
     );
 

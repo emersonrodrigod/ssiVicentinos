@@ -1,9 +1,146 @@
 <div class="row-fluid">
     <div class="span6">
-        <a href="/solicitacoes/novo" class="btn btn-success"><i class="icon-tags icon-2x"></i> <br> Nova Solicitação</a>
-        <a href="/equipamentos/novo" class="btn btn-success"><i class="icon-briefcase icon-2x"></i> <br> Novo Equipamento</a>
-        <a href="#printAgenda" class="btn" data-toggle="modal"><i class="icon-print icon-2x"></i> <br> Imprimir Agenda</a>
+        <a href="/solicitacoes/novo" class="btn btn-success">
+            <span class="visible-desktop">
+                <i class="icon-tags icon-2x"></i> <br> Nova Solicitação
+            </span>
+            <span class="hidden-desktop">
+                <i class="icon-tags icon-2x"></i>
+            </span>
+
+        </a>
+
+        <a href="/equipamentos/novo" class="btn btn-success">
+            <span class="visible-desktop">
+                <i class="icon-briefcase icon-2x"></i> <br> Novo Equipamento
+            </span>
+            <span class="hidden-desktop">
+                <i class="icon-briefcase icon-2x"></i>
+            </span>
+        </a>
+
+        <a href="#printAgenda" class="btn" data-toggle="modal">
+            <span class="visible-desktop">
+                <i class="icon-print icon-2x"></i> <br> Agenda
+            </span>
+            <span class="hidden-desktop">
+                <i class="icon-print icon-2x"></i>
+            </span>
+        </a>
+    </div>
+
+    <div class="span6">
+        <div class="pull-right">
+            <h5>Situação</h5>
+            <span class="badge badge-success">13</span> Concluídas &nbsp;
+            <span class="badge badge-important">15</span> Pendentes &nbsp;
+            <span class="badge badge-warning">22</span> Em andamento
+        </div>
     </div>
 </div>
 
 <hr/>
+
+<div class="row-fluid">
+
+    <div class="span6">
+        <h4>Situação geral</h4>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Task', 'status'],
+                    ['Pendentes', 11],
+                    ['Em andamento', 2],
+                    ['Concluídas', 2],
+                    ['Pausadas', 2]
+                ]);
+
+                var options = {
+                    width: '100%',
+                    height: '100%'
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('statusChart'));
+
+                chart.draw(data, options);
+
+                $(window).resize(function() {
+                    chart.draw(data, options);
+                });
+
+            }
+        </script>
+
+        <div id="statusChart"></div>
+    </div>
+
+    <div class="span6">
+        <h4>Solicitações por Empresa</h4>
+
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Company', 'Solicitações'],
+                    ['Vicentinos do Brasil', 25],
+                    ['VIQL', 30],
+                    ['Loydi', 12],
+                    ['Carbet', 1]
+                ]);
+
+                var options = {
+                    width: '100%',
+                    height: '100%'
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('companyChart'));
+                chart.draw(data, options);
+
+                $(window).resize(function() {
+                    chart.draw(data, options);
+                });
+            }
+        </script>
+
+        <div id="companyChart"></div>
+    </div>
+
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+
+        <h4>Solicitações por Tipo</h4>
+
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Tipos', 'Solicitações'],
+                    ['Pequena Manutenção', 20],
+                    ['Dúvida', 10],
+                    ['Projeto', 5],
+                    ['Treinamento', 25]
+                ]);
+
+                var options = {
+                    width: '100%',
+                    height: '100%'
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('kindOfTaskChart'));
+                chart.draw(data, options);
+
+                $(window).resize(function() {
+                    chart.draw(data, options);
+                });
+            }
+        </script>
+
+        <div id="kindOfTaskChart"></div>
+    </div>
+</div>

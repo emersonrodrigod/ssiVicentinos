@@ -85,6 +85,16 @@ CREATE TABLE IF NOT EXISTS `log_acessos` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tablea `processo`
+--
+
+CREATE TABLE IF NOT EXISTS `processo` (
+    id int NOT NULL auto_increment PRIMARY KEY,
+    nome varchar(255) NOT NULL,
+    ativo int NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
 -- Estrutura da tabela `ssi`
 --
 
@@ -177,6 +187,10 @@ ALTER TABLE `ssi`
 ALTER TABLE `usuario`
   ADD CONSTRAINT `fk_usuario_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_usuario_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `ssi`
+  ADD `id_processo` int NOT NULL,
+  ADD CONSTRAINT `fk_processo_ssi` FOREIGN KEY (`id_processo`) REFERENCES `processo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
