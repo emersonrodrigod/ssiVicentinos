@@ -23,4 +23,12 @@ class Departamento extends Zend_Db_Table_Abstract {
         return new Zend_Filter_Input(array(), $validadores, $dados);
     }
 
+    public function getByEmpresa($idEmpresa) {
+        return $this->fetchAll("id_empresa = {$idEmpresa}");
+    }
+
+    public function listaAtivos($idEmpresa) {
+        return $this->fetchAll("id_empresa = {$idEmpresa} and ativo = 1");
+    }
+
 }

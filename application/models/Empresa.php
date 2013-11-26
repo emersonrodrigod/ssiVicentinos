@@ -16,4 +16,8 @@ class Empresa extends Zend_Db_Table_Abstract {
         return new Zend_Filter_Input(array(), $validadores, $dados);
     }
 
+    public function listaAtivos() {
+        return $this->fetchAll('ativo = 1');
+    }
+
 }
