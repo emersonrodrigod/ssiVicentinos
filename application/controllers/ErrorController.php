@@ -1,58 +1,33 @@
 <?php
 
-class ErrorController extends Zend_Controller_Action
-{
+class ErrorController extends Zend_Controller_Action {
 
-    public function errorAction()
-    {
+    public function errorAction() {
+        // limpa o conteúdo gerado antes do erro
+        $this->getResponse()->clearBody();
+
+        // pega a exceção e manda para o template
         $errors = $this->_getParam('error_handler');
-        
-        if (!$errors || !$errors instanceof ArrayObject) {
-            $this->view->message = 'You have reached the error page';
-            return;
-        }
-        
+        $this->view->exception = $errors->exception;
+
+        // escolhe a view de acordo com o erro
         switch ($errors->type) {
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
+
+            // página não encontrada (404)
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-                // 404 error -- controller or action not found
-                $this->getResponse()->setHttpResponseCode(404);
-                $priority = Zend_Log::NOTICE;
-                $this->view->message = 'Page not found';
+
+                $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
+
+                // renderiza a view "error/404.phtml" no lugar da view padrão
+                $this->render('404');
                 break;
+
+            // erro no programa, exceção não tratada
+            // deixa renderizar o template padrão (error/error.phtml)
             default:
-                // application error
-                $this->getResponse()->setHttpResponseCode(500);
-                $priority = Zend_Log::CRIT;
-                $this->view->message = 'Application error';
-                break;
         }
-        
-        // Log exception, if logger available
-        if ($log = $this->getLog()) {
-            $log->log($this->view->message, $priority, $errors->exception);
-            $log->log('Request Parameters', $priority, $errors->request->getParams());
-        }
-        
-        // conditionally display exceptions
-        if ($this->getInvokeArg('displayExceptions') == true) {
-            $this->view->exception = $errors->exception;
-        }
-        
-        $this->view->request   = $errors->request;
     }
-
-    public function getLog()
-    {
-        $bootstrap = $this->getInvokeArg('bootstrap');
-        if (!$bootstrap->hasResource('Log')) {
-            return false;
-        }
-        $log = $bootstrap->getResource('Log');
-        return $log;
-    }
-
 
 }
 

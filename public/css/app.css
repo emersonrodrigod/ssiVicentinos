@@ -125,6 +125,10 @@ h2 {
     border-color: #428bca;
 }
 
+.open .dropdown-toggle {
+    background-color: #3783c8 !important;
+}
+
 .navbar-inverse .btn-navbar {
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
@@ -193,6 +197,57 @@ h2 {
 .navbar-inverse .nav-collapse .nav > li > a:focus, .navbar-inverse .nav-collapse .nav > li > a:hover {
     background-color: #3783c8 !important;
     color: #fff !important;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    background-color: #428bca !important;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0);
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 21px;
+    color: #fff;
+    white-space: nowrap;
+    text-align: left !important;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #3783c8;
+    background-image: -moz-linear-gradient(top, #3783c8, #3783c8);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3783c8), to(#3783c8));
+    background-image: -webkit-linear-gradient(top, #3783c8, #3783c8);
+    background-image: -o-linear-gradient(top, #3783c8, #3783c8);
+    background-image: linear-gradient(to bottom, #3783c8, #3783c8);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3783c8', endColorstr='#3783c8', GradientType=0);
 }
 
 /* .btn */
@@ -641,3 +696,11 @@ h2 {
 .alert-info {
     background-color: #67c2ef;
 }
+
+/* para fazer control-rows com labels */
+.control-group {
+    display: inline-block;
+    vertical-align: top;
+
+}
+
