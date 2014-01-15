@@ -20,13 +20,21 @@ class ErrorController extends Zend_Controller_Action {
                 $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
 
                 // renderiza a view "error/404.phtml" no lugar da view padrão
-                $this->render('404');
+                $this->render('pageNotFound');
                 break;
 
             // erro no programa, exceção não tratada
             // deixa renderizar o template padrão (error/error.phtml)
             default:
         }
+    }
+    
+    public function pageNotFoundAction(){
+        
+    }
+    
+    public function accessDeniedAction(){
+        
     }
 
 }

@@ -14,7 +14,7 @@ class Webagille_Plugins_CheckAcl extends Zend_Controller_Plugin_Abstract {
         $action = $request->getActionName();
 
         if (!$this->_acl->has($module . ':' . $resource)) {
-            $this->redirect($request);
+            $this->redirect404($request);
         } elseif (!$this->_acl->isAllowed(Zend_Registry::get('role'), $module . ':' . $resource, $action)) {
             $this->redirect($request);
         }
@@ -22,8 +22,14 @@ class Webagille_Plugins_CheckAcl extends Zend_Controller_Plugin_Abstract {
 
     public function redirect($request) {
         $request->setModuleName('default')
-                ->setControllerName('auth')
-                ->setActionName('index');
+                ->setControllerName('error')
+                ->setActionName('access-denied');
+    }
+
+    public function redirect404($request) {
+        $request->setModuleName('default')
+                ->setControllerName('error')
+                ->setActionName('page-not-found');
     }
 
 }

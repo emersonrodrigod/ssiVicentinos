@@ -17,7 +17,7 @@
         <r0003 role="admin"  inherit="usuario" />
     </roles>
     <allow>
-        <a0001 role="guest" resource="default:auth" privileges="logout,registrar,request-password" />
+        <a0001 role="guest" resource="default:auth" />
         <a0002 role="admin" resource="default:index" />
         <a0003 role="admin" resource="default:configuracoes" />
         <a0004 role="admin" resource="default:empresas" />

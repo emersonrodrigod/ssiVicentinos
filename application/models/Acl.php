@@ -57,10 +57,13 @@ class Acl extends Zend_Acl {
                 $role = (array) $source['role'];
                 $resource = $source['resource'];
                 $privileges = array_key_exists('privileges', $source) ? explode(',', $source['privileges']) : null;
-                $this->allow($role, $resource, $privileges);
+
+                if (!is_null($privileges)) {
+                    $this->allow($role, $resource, $privileges);
+                } else {
+                    $this->allow($role, $resource);
+                }
             }
-        } else {
-            
         }
     }
 
@@ -69,7 +72,12 @@ class Acl extends Zend_Acl {
             $role = (array) $source['role'];
             $resource = $source['resource'];
             $privileges = array_key_exists('privileges', $source) ? explode(',', $source['privileges']) : null;
-            $this->dany($role, $resource, $privileges);
+
+            if (!is_null($privileges)) {
+                $this->dany($role, $resource, $privileges);
+            } else {
+                $this->dany($role, $resource);
+            }
         }
     }
 
