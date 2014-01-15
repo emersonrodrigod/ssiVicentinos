@@ -13,10 +13,18 @@ class Webagille_Plugins_CheckAcl extends Zend_Controller_Plugin_Abstract {
         $resource = $request->getControllerName();
         $action = $request->getActionName();
 
-        if (!$this->_acl->has($module . ':' . $resource)) {
-            $this->redirect404($request);
-        } elseif (!$this->_acl->isAllowed(Zend_Registry::get('role'), $module . ':' . $resource, $action)) {
-            $this->redirect($request);
+        $auth = Zend_Auth::getInstance();
+        $auth->setStorage(new Zend_Auth_Storage_Session('usuario'));
+
+        if (!$auth->hasIdentity() && $resource != 'auth') {
+            $this->redirectIndex($request);
+        } else {
+
+            if (!$this->_acl->has($module . ':' . $resource)) {
+                $this->redirect404($request);
+            } elseif (!$this->_acl->isAllowed(Zend_Registry::get('role'), $module . ':' . $resource, $action)) {
+                $this->redirect($request);
+            }
         }
     }
 
@@ -30,6 +38,12 @@ class Webagille_Plugins_CheckAcl extends Zend_Controller_Plugin_Abstract {
         $request->setModuleName('default')
                 ->setControllerName('error')
                 ->setActionName('page-not-found');
+    }
+
+    public function redirectIndex($request) {
+        $request->setModuleName('default')
+                ->setControllerName('auth')
+                ->setActionName('index');
     }
 
 }

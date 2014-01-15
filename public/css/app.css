@@ -698,7 +698,7 @@ h2 {
 }
 
 /* para fazer control-rows com labels */
-.control-group {
+.label-inline {
     display: inline-block;
     vertical-align: top;
 
