@@ -10,6 +10,7 @@
         <r0007 resource="default:processos" />
         <r0008 resource="default:usuarios" />
         <r0009 resource="default:solicitacoes" />
+        <r0010 resource="default:ajax" />
     </resources>
     <roles>
         <r0001 role="guest" />
@@ -26,6 +27,7 @@
         <a0008 role="admin" resource="default:usuarios" />
         <a0009 role="admin" resource="default:solicitacoes" />
         <a0010 role="usuario" resource="default:index" />
+        <a0011 role="admin" resource="default:ajax" />
         
     </allow>
 </acl>

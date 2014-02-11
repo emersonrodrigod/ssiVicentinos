@@ -4,14 +4,25 @@
 
         <hr>
 
-        <p><a href="/tipos-ssi/novo" class="btn btn-primary"><i class="icon-tags"></i> &nbsp; Nova Solicitação</a></p>
+        <p>
+            <a href="/solicitacoes/novo" class="btn btn-primary"><i class="icon-tags"></i> &nbsp; Nova Solicitação</a>
+            <a href="javascrip:void(0);" id="mostraFiltro" class="btn-small btn-primary pull-right" style="display: none;"><i class="icon-filter"></i> &nbsp; Filtro</a>
+        </p>
 
-        <div id="filtros" class="row-fluid" style="display: none;">
+        <div id="filtros" class="row-fluid">
 
             <form method="post" class="well">
                 <legend>Pesquisa de solicitações</legend>
 
                 <div class="controls-row">
+
+                    <div class="control-group label-inline">
+                        <label for="codigo" class="control-label">Código:</label>
+                        <div class="controls">
+                            <input type="text" id="codigo" name="codigo" class="input-medium"/>
+                        </div>                
+                    </div>
+
                     <div class="control-group label-inline">
                         <label for="texto" class="control-label">Texto dentro da solicitação:</label>
                         <div class="controls">
@@ -19,55 +30,117 @@
                         </div>                
                     </div>
 
-                    &nbsp;&nbsp;
+                    <div class="control-group label-inline">
+                        <label for="inicio" class="control-label">Data inicial:</label>
+                        <div class="controls">
+                            <input type="text" id="inicio" name="inicio" class="input-small datepicker"/>
+                        </div>                
+                    </div>
+
+                    <div class="control-group label-inline">
+                        <label for="final" class="control-label">Data final:</label>
+                        <div class="controls">
+                            <input type="text" id="final" name="final" class="input-small datepicker"/>
+                        </div>                
+                    </div>
+
+                </div>
+
+                <div class="controls-row">
+
+                    <div class="control-group label-inline">
+                        <label for="tipo" class="control-label">Tipo de Solicitação:</label>
+                        <div class="controls">
+                            <select name="tipo" id="tipo">
+                                <option value="">Todos</option>
+                            </select>
+                        </div>                
+                    </div>
+
+                    <div class="control-group label-inline">
+                        <label for="empresa" class="control-label">Empresa:</label>
+                        <div class="controls">
+                            <select name="empresa" id="empresa">
+                                <option value="">Todas</option>
+                            </select>
+                        </div>                
+                    </div>
+
+                    <div class="control-group label-inline">
+                        <label for="departamento" class="control-label">Departamento:</label>
+                        <div class="controls">
+                            <select name="departamento" id="departamento">
+                                <option value="">Todos</option>
+                            </select>
+                        </div>                
+                    </div>
+
+                </div>
+
+                <div class="controls-row">
 
                     <div class="control-group label-inline">
                         <label for="texto" class="control-label">Situação da Solicitação: </label>
                         <div class="controls">
                             <label class="checkbox inline">
-                                <input type="checkbox" id="inlineCheckbox1" value="option1"> Pendente
+                                <input type="checkbox" id="inlineCheckbox1" name="situacao[]" checked="checked" value="PENDENTE"> Pendente
                             </label>
                             <label class="checkbox inline">
-                                <input type="checkbox" id="inlineCheckbox2" value="option2"> Paralisada
+                                <input type="checkbox" id="inlineCheckbox2" name="situacao[]" checked="checked" value="ANDAMENTO"> Em Andamento
                             </label>
                             <label class="checkbox inline">
-                                <input type="checkbox" id="inlineCheckbox3" value="option3"> Aguardando Recursos
+                                <input type="checkbox" id="inlineCheckbox3" name="situacao[]" checked="checked" value="PARALISADA"> Paralisada
                             </label>
                             <label class="checkbox inline">
-                                <input type="checkbox" id="inlineCheckbox3" value="option3"> Concluída
+                                <input type="checkbox" id="inlineCheckbox3" name="situacao[]" checked="checked" value="TERCEIROS"> Terceiros
+                            </label> 
+                            <label class="checkbox inline">
+                                <input type="checkbox" id="inlineCheckbox3" name="situacao[]" checked="checked" value="CONCLUIDA"> Concluída
+                            </label> 
+                            <label class="checkbox inline">
+                                <input type="checkbox" id="inlineCheckbox3" name="situacao[]" checked="checked" value="CANCELADA"> Cancelada
                             </label> 
                         </div>
                     </div>
                 </div>
 
                 <div class="controls-row">
-                    <div class="control-group">
-                        <label for="texto" class="control-label">Empresa:</label>
+                    <div class="control-group label-inline">
+                        <label for="submitbutton" class="control-label">&nbsp;</label>
                         <div class="controls">
-                            <select name="empresa">
-                                <option value="">Todas</option>
-                            </select>
-                        </div>                
+                            <input type="submit" id="submitbutton" class="btn btn-small btn-primary" value="Pesquisar">  
+                        </div>
                     </div>
                 </div>
             </form>
-        </div>
-
-        <div style="float: right;">
-            <a href="javascrit:void(0);" id="toggleSearch" class="btn btn-primary btn-mini"><i class="icon-search"></i> Mostrar pesquisa</a>
         </div>
 
         <table class="table table-hover dataTable">
             <thead>
                 <tr>
                     <th width="5%">#id</th>
-                    <th>Nome</th>
+                    <th>Resumo</th>
+                    <th>Tipo</th>
+                    <th>Abertura</th>
+                    <th>Solução</th>
                     <th width="10%">Situação</th>
                     <th width="10%">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
-
+                <?php if (isset($this->chamados)) : ?>
+                    <?php foreach ($this->chamados as $ssi) : ?>
+                        <tr>
+                            <td><?php echo $ssi->id; ?></td>
+                            <td><?php echo $ssi->resumo; ?></td>
+                            <td><?php echo $ssi->findParentRow('TipoSsi')->nome; ?></td>
+                            <td><?php echo date('d/m/Y h:m', strtotime($ssi->dataAbertura)); ?></td>
+                            <td><?php echo ($ssi->dataEncerramento == null ? '' : date('d/m/Y h:m', strtotime($ssi->dataEncerramento))); ?></td>
+                            <td><?php echo $ssi->status; ?></td>
+                            <td></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
         <script type="text/javascript">
@@ -75,7 +148,7 @@
                 var oTable = $('.dataTable').dataTable({
                     "bPaginate": false,
                     "bFilter": false,
-                    "bInfo": false,
+                    "bInfo": true,
                     "oLanguage": {
                         "sProcessing": "Processando...",
                         "sLengthMenu": "Mostrar _MENU_ registros",
@@ -89,9 +162,41 @@
                     }
                 });
 
-                $("#toggleSearch").click(function() {
-                    $("#filtros").toggle('slow');
+                $.getJSON('/ajax/get-empresas', {ajax: 'true'}, function(j) {
+                    var options = '<option value="">Todas</option>';
+                    for (var i = 0; i < j.length; i++) {
+                        options += '<option value="' + j[i].id + '">' + j[i].nome + '</option>';
+                    }
+                    $('#empresa').html(options).show();
                 });
+
+                $.getJSON('/ajax/get-tipo', {ajax: 'true'}, function(j) {
+                    var options = '<option value="">Todos</option>';
+                    for (var i = 0; i < j.length; i++) {
+                        options += '<option value="' + j[i].id + '">' + j[i].nome + '</option>';
+                    }
+                    $('#tipo').html(options).show();
+                });
+
+                $('#empresa').change(function() {
+                    $("#departamento").html('<option value="">Carregando....</option>');
+                    $.getJSON('/usuarios/departamentos', {empresa: $(this).val(), ajax: 'true'}, function(j) {
+                        var options = '<option value="">Todos</option>';
+                        for (var i = 0; i < j.length; i++) {
+                            options += '<option value="' + j[i].id + '">' + j[i].nome + '</option>';
+                        }
+                        $('#departamento').html(options).show();
+                    });
+                });
+
+                $("#mostraFiltro").click(function() {
+                    $("#filtros").toggle("slow");
+                });
+
+<?php if (isset($this->chamados)) : ?>
+                    $("#mostraFiltro").show();
+                    $("#filtros").hide();
+<?php endif; ?>
             });
         </script> 
     </div>

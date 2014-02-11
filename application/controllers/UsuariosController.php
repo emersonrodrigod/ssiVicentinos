@@ -83,4 +83,24 @@ class UsuariosController extends Zend_Controller_Action {
         echo json_encode($departamentos);
     }
 
+    public function senhaAction() {
+        $this->_helper->layout()->disableLayout();
+        $this->getHelper('viewRenderer')->setNoRender();
+
+        $usuario = new Usuario();
+        $search = $usuario->find(intval($this->_getParam('id'))); 
+        
+        if ($search) {
+            $dados['senha'] = sha1('123mudar');
+
+            try {
+                $usuario->update($dados, "id = {$this->_getParam('id')}");
+                $this->_helper->flashMessenger(array('success' => 'Senha do Usuário '. $search->current()->nome . ' foi definida para 123mudar'));
+                $this->_redirect('/usuarios');
+            } catch (Exception $exc) {
+                $this->_helper->flashMessenger(array('error' => 'Desculpe, ocorreu um erro: ' . $exc->getMessage()));
+            }
+        }
+    }
+
 }
