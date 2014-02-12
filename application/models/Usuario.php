@@ -37,5 +37,9 @@ class Usuario extends Zend_Db_Table_Abstract {
 
         return new Zend_Filter_Input(array(), $validadores, $dados);
     }
+    
+    public function getByDepartamento($idDepartamento){
+        return $this->fetchAll("ativo = 1 and id_departamento = {$idDepartamento}");
+    }
 
 }

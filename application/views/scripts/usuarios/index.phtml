@@ -14,7 +14,7 @@
                     <th>E-mail</th>
                     <th>Role</th>
                     <th width="10%">Ativo</th>
-                    <th width="10%">&nbsp;</th>
+                    <th width="15%">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +28,7 @@
                         <td>
                             <a href="/usuarios/editar/id/<?php echo $usuario->id; ?>" class="btn btn-small"><i class="icon-edit"></i></a>
                             <a href="/usuarios/remover/id/<?php echo $usuario->id; ?>" class="btn btn-danger btn-small delete"><i class="icon-remove-sign"></i></a>
+                            <a href="/usuarios/senha/id/<?php echo $usuario->id; ?>" class="btn btn-info btn-small" title="Zerar Senha"><i class="icon-key"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

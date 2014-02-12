@@ -152,7 +152,7 @@ h2, h3 {
 }
 }body {
     margin: 0;
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Lato",Arial, sans-serif;
     font-size: 15px;
     line-height: 21px;
     color: #2c3e50;
@@ -1044,7 +1044,7 @@ label, input, button, select, textarea {
     line-height: 21px;
 }
 input, button, select, textarea {
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Lato",Arial, sans-serif;
 }
 label {
     display: block;
@@ -4164,7 +4164,7 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 .navbar-search .search-query {
     margin-bottom: 0;
     padding: 4px 14px;
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Lato",Arial, sans-serif;
     font-size: 13px;
     font-weight: normal;
     line-height: 1;
@@ -8342,7 +8342,7 @@ body {
     padding-top: 90px;
     padding-bottom: 40px;
     position: relative;
-    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+    font-family: "Source Sans Pro", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
     -ms-font-smoothing: antialiased;
@@ -8360,7 +8360,7 @@ a {
 }
 h2 {
     font-weight: 100;
-    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+    font-family: "Source Sans Pro", Arial, sans-serif;
 }
 .navbar-inverse .brand {
     font-family: 'Lato';
