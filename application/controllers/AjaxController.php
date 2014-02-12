@@ -13,7 +13,7 @@ class AjaxController extends Zend_Controller_Action {
         echo Zend_Json_Encoder::encode($todas);
     }
 
-    public function getDepartamentosByEmpresa() {
+    public function getDepartamentosByEmpresaAction() {
         $departamento = new Departamento();
         $departamentos = $departamento->getByEmpresa($this->_getParam('empresa'))->toArray();
         echo Zend_Json_Encoder::encode($departamentos);
@@ -23,6 +23,12 @@ class AjaxController extends Zend_Controller_Action {
         $tipo = new TipoSsi();
         $tipos = $tipo->fetchAll('ativo = 1')->toArray();
         echo Zend_Json_Encoder::encode($tipos);
+    }
+
+    public function getUsuarioByDepartamentoAction() {
+        $usuario = new Usuario();
+        $usuarios = $usuario->getByDepartamento($this->_getParam(('departamento')))->toArray();
+        echo Zend_Json_Encoder::encode($usuarios);
     }
 
 }

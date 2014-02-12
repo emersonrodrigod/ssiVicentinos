@@ -706,3 +706,10 @@ h2 {
 
 }
 
+/*status*/
+.pendente {color: #CACA00 !important;}
+.andamento{color: #00AE38 !important;}
+.paralisada{color: #CC3300 !important;}
+.terceiros{color: #0079CA !important;}
+.concluida{color: #00AE38 !important;}
+

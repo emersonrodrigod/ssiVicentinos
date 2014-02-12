@@ -118,26 +118,56 @@
         <table class="table table-hover dataTable">
             <thead>
                 <tr>
-                    <th width="5%">#id</th>
+                    <th width="5%" class="txtCenter">#id</th>
                     <th>Resumo</th>
-                    <th>Tipo</th>
-                    <th>Abertura</th>
-                    <th>Solução</th>
-                    <th width="10%">Situação</th>
-                    <th width="10%">&nbsp;</th>
+                    <th class="txtCenter">Usuário</th>
+                    <th class="txtCenter">Abertura</th>
+                    <th class="hidden-phone txtCenter">Solução</th>
+                    <th width="10%" class="txtCenter">Situação</th>
+                    <th width="10%" class="txtCenter">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (isset($this->chamados)) : ?>
                     <?php foreach ($this->chamados as $ssi) : ?>
                         <tr>
-                            <td><?php echo $ssi->id; ?></td>
+                            <td class="txtCenter"><?php echo str_pad($ssi->id, 6, '0', STR_PAD_LEFT); ?></td>
                             <td><?php echo $ssi->resumo; ?></td>
-                            <td><?php echo $ssi->findParentRow('TipoSsi')->nome; ?></td>
-                            <td><?php echo date('d/m/Y h:m', strtotime($ssi->dataAbertura)); ?></td>
-                            <td><?php echo ($ssi->dataEncerramento == null ? '' : date('d/m/Y h:m', strtotime($ssi->dataEncerramento))); ?></td>
-                            <td><?php echo $ssi->status; ?></td>
-                            <td></td>
+                            <td class="txtCenter"><?php echo $ssi->findParentRow('Usuario')->nome; ?></td>
+                            <td class="txtCenter"><?php echo date('d/m/Y H:i', strtotime($ssi->dataAbertura)); ?></td>
+                            <td class="hidden-phone txtCenter"><?php echo ($ssi->dataEncerramento == null ? '' : date('d/m/Y H:i', strtotime($ssi->dataEncerramento))); ?></td>
+                            <td class="txtCenter">
+                                <?php
+                                if ($ssi->status == 'PENDENTE') {
+                                    echo '<i class="icon-warning-sign pendente" title="Pendente"></i>';
+                                };
+
+                                if ($ssi->status == 'ANDAMENTO') {
+                                    echo '<i class="icon-warning-sign andamento" title="Em Andamento"></i>';
+                                };
+
+                                if ($ssi->status == 'PARALISADA') {
+                                    echo '<i class="icon-warning-sign paralisada" title="Paralisada"></i>';
+                                };
+
+                                if ($ssi->status == 'TERCEIROS') {
+                                    echo '<i class="icon-exclamation-sign terceiros" title="Terceiros"></i>';
+                                };
+                                if ($ssi->status == 'CONCLUIDA') {
+                                    echo '<i class="icon-check-sign concluida" title="Concluída"></i>';
+                                };
+                                ?>
+                            </td>
+                            
+                            <td class="txtCenter">
+                                <a href="/solicitacoes/detalhes/id/<?php echo $ssi->id; ?>" class="btn btn-mini btn-primary" title="Visualizar Detalhes">
+                                    <i class="icon-folder-open"></i>
+                                </a>
+                                &nbsp;
+                                <a href="/solicitacoes/detalhes/id/<?php echo $ssi->id; ?>" class="btn btn-mini btn-primary" title="Solicitar Posicionamento">
+                                    <i class="icon-question"></i>
+                                </a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>

@@ -1,0 +1,134 @@
+<div class="row-fluid">
+    <h2>Nova Solicitação</h2>
+
+    <hr>
+
+    <form method="post" class="form" id="solicitacao">
+        <input type="hidden" name="id_usuario_abertura" value="<?php echo $this->usuarioLogado->read()->id; ?>" />
+        <div class="row-fluid">
+            <div class="span1 txtCenter">
+                <i class="icon-tag icon-3x muted"></i>
+            </div>
+            <div class="span11">
+                <div class="control-group">
+                    <label class="control-label">
+                        <label for="resumo">Resumo</label>
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="resumo" name="resumo" class="input-xxlarge">							
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        <label for="descricao">Descrição</label>
+                    </label>
+                    <div class="controls">
+                        <textarea name="descricao" id="descricao" class="input-xxlarge" rows="7"></textarea>							
+                    </div>
+                </div>
+
+                <?php if ($this->usuarioLogado->read()->role == 'usuario') : ?>
+                    <input type="hidden" name="id_usuario" value="<?php echo $this->usuarioLogado->read()->id; ?>" />
+                    <input type="hidden" name="id_empresa" value="<?php echo $this->usuarioLogado->read()->id_empresa; ?>" />
+                    <input type="hidden" name="id_departamento" value="<?php echo $this->usuarioLogado->read()->id_departamento; ?>" />
+                <?php endif; ?>
+
+                <?php if ($this->usuarioLogado->read()->role != 'usuario') : ?>
+                    <div class="controls-row">
+                        <div class="control-group label-inline">
+                            <div class="controls">
+                                <label for="empresa" class="control-label">Empresa:</label>
+                                <div class="controls">
+                                    <select name="id_empresa" id="empresa" class="input-large">
+                                        <option value="">Todas</option>
+                                    </select>
+                                </div>                						
+                            </div>
+                        </div>
+                        <div class="control-group label-inline">
+                            <label class="control-label">
+                                <label for="departamento">Departamento</label>
+                            </label>
+                            <div class="controls">
+                                <select name="id_departamento" id="departamento" class="input-large">
+                                    <option value="">Selecione um Departamento....</option> 
+                                </select>							
+                            </div>
+                        </div>
+
+                        <div class="control-group label-inline">
+                            <label class="control-label">
+                                <label for="usuario">Usuário</label>
+                            </label>
+                            <div class="controls">
+                                <select name="id_usuario" id="usuario" class="input-large">
+                                    <option value="">Selecione um Usuario</option> 
+                                </select>							
+                            </div>
+                        </div>
+
+                    </div>
+
+                <?php endif; ?>
+
+                <div class="control-group">
+                    <label class="control-label">
+                        <label for="anexo">Anexo</label>
+                    </label>
+                    <div class="controls">
+                        <input type="file" id="anexo" name="anexo" class="input-xxlarge">							
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <input type="submit" id="submitbutton" class="btn btn-primary" value="Salvar">  
+            <a href="/solicitacoes" class="btn">Cancelar</a>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+        $('#solicitacao').validate({
+            rules: {
+                resumo: {required: true},
+                descricao: {required: true},
+                id_empresa: {required: true},
+                id_departamento: {required: true},
+                id_usuario: {required: true}
+            }
+        });
+
+        $.getJSON('/ajax/get-empresas', {ajax: 'true'}, function(j) {
+            var options = '<option value="">Selecione uma Empresa</option>';
+            for (var i = 0; i < j.length; i++) {
+                options += '<option value="' + j[i].id + '">' + j[i].nome + '</option>';
+            }
+            $('#empresa').html(options).show();
+        });
+
+        $('#empresa').change(function() {
+            $("#departamento").html('<option value="">Carregando....</option>');
+            $.getJSON('/ajax/get-departamentos-by-empresa', {empresa: $(this).val(), ajax: 'true'}, function(j) {
+                var options = '<option value="">Selecione um Departamento</option>';
+                for (var i = 0; i < j.length; i++) {
+                    options += '<option value="' + j[i].id + '">' + j[i].nome + '</option>';
+                }
+                $('#departamento').html(options).show();
+            });
+        });
+
+        $('#departamento').change(function() {
+            $("#usuario").html('<option value="">Carregando....</option>');
+            $.getJSON('/ajax/get-usuario-by-departamento', {departamento: $(this).val(), ajax: 'true'}, function(j) {
+                var options = '<option value="">Selecione um Usuário</option>';
+                for (var i = 0; i < j.length; i++) {
+                    options += '<option value="' + j[i].id + '">' + j[i].nome + '</option>';
+                }
+                $('#usuario').html(options).show();
+            });
+        });
+    </script>  
+
+</div>
