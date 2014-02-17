@@ -111,6 +111,10 @@ class Ssi extends Zend_Db_Table_Abstract {
 
             $this->gravaHistorico($dadosHistorico);
 
+            $this->enviaEmail(
+                    "Solicitação de serviço cadastrada", "Sua Solicitação de serviço foi cadastrada no sistema. Em breve sua solicitação será concluída.", $this->find($lastId)->current(), array($this->find($lastId)->current()->findParentRow('Usuario')->email, 'ti@vicentinos.com.br')
+            );
+
             //Rotina para enviar o e-mail
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
@@ -120,6 +124,96 @@ class Ssi extends Zend_Db_Table_Abstract {
     public function gravaHistorico($dados) {
         $historico = new HistoricoSsi();
         $historico->insert($dados);
+    }
+
+    public function solicitaPosicao($dados) {
+        $this->gravaHistorico($dados);
+    }
+
+    public function cancelaSolicitacao($solicitacao, $dadosHistorico) {
+        $dadosSsi = array(
+            'status' => 'CANCELADA',
+            'dataEncerramento' => date("Y-m-d H:i:s")
+        );
+
+        $this->update($dadosSsi, "id = {$solicitacao->id}");
+        $this->gravaHistorico($dadosHistorico);
+
+        $this->enviaEmail(
+                "Cancelamento de solicitação de serviço", "Solicitação de Serviço cancelada pelo usuário", $solicitacao, array($solicitacao->findParentRow('Usuario')->email, 'ti@vicentinos.com.br')
+        );
+    }
+
+    public function reabreSolicitacao($solicitacao, $dadosHistorico) {
+        $dadosSsi = array(
+            'status' => 'PENDENTE',
+            'dataEncerramento' => null
+        );
+
+        $this->update($dadosSsi, "id = {$solicitacao->id}");
+        $this->gravaHistorico($dadosHistorico);
+
+        $this->enviaEmail(
+                "Solicitação de serviço reaberta", "Solicitação de Serviço foi reaberta no sistema", $solicitacao, array($solicitacao->findParentRow('Usuario')->email, 'ti@vicentinos.com.br')
+        );
+    }
+
+    public function transferirSolicitacao($solicitacao, $dadosHistorico) {
+        $dadosSsi = array(
+            'status' => 'TERCEIROS'
+        );
+
+        $this->update($dadosSsi, "id = {$solicitacao->id}");
+        $this->gravaHistorico($dadosHistorico);
+
+        $this->enviaEmail(
+                "Solicitação de serviço Transferida", "Solicitação de Serviço foi Transferida para um terceiro", $solicitacao, array($solicitacao->findParentRow('Usuario')->email)
+        );
+    }
+
+    public function concluirSolicitacao($solicitacao, $dadosHistorico) {
+        $dadosSsi = array(
+            'status' => 'CONCLUIDA',
+            'dataEncerramento' => date("Y-m-d H:i:s")
+        );
+
+        $this->update($dadosSsi, "id = {$solicitacao->id}");
+        $this->gravaHistorico($dadosHistorico);
+
+        $this->enviaEmail(
+                "Solicitação de serviço Concluída", "Solicitação de Serviço foi Concluída", $solicitacao, array($solicitacao->findParentRow('Usuario')->email)
+        );
+    }
+
+    public function classificarSolicitacao($solicitacao, $dadosHistorico, $dados) {
+        $dadosSsi = array(
+            'status' => 'ANDAMENTO',
+            'previsaoEncerramento' => Util::dataMysql($dados['previsaoConclusao']),
+            'id_processo' => $dados['processo'],
+            'id_tipo' => $dados['tipo']
+        );
+
+        $this->update($dadosSsi, "id = {$solicitacao->id}");
+        $this->gravaHistorico($dadosHistorico);
+
+        $this->enviaEmail(
+                "Solicitação de serviço Em Andamento", "Solicitação de está em andamento", $solicitacao, array($solicitacao->findParentRow('Usuario')->email)
+        );
+    }
+
+    public function enviaEmail($titulo, $texto, $ssi, $from = array()) {
+        $html = new Zend_View();
+        $html->setScriptPath(APPLICATION_PATH . '/views/scripts/templates/');
+
+        $html->assign('titulo', $titulo);
+        $html->assign('texto', $texto);
+        $html->assign('registro', $ssi);
+
+        $bodyText = $html->render('mailTemplate.phtml');
+
+        $util = new Util();
+
+        $util->sendMail("SSI - Notificação Automática", $bodyText, $from);
     }
 
 }

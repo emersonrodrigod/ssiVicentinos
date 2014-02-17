@@ -156,16 +156,16 @@
                                 if ($ssi->status == 'CONCLUIDA') {
                                     echo '<i class="icon-check-sign concluida" title="Concluída"></i>';
                                 };
+
+                                if ($ssi->status == 'CANCELADA') {
+                                    echo '<i class="icon-remove-sign paralisada" title="Cancelada"></i>';
+                                };
                                 ?>
                             </td>
-                            
+
                             <td class="txtCenter">
                                 <a href="/solicitacoes/detalhes/id/<?php echo $ssi->id; ?>" class="btn btn-mini btn-primary" title="Visualizar Detalhes">
                                     <i class="icon-folder-open"></i>
-                                </a>
-                                &nbsp;
-                                <a href="/solicitacoes/detalhes/id/<?php echo $ssi->id; ?>" class="btn btn-mini btn-primary" title="Solicitar Posicionamento">
-                                    <i class="icon-question"></i>
                                 </a>
                             </td>
                         </tr>
@@ -210,7 +210,7 @@
 
                 $('#empresa').change(function() {
                     $("#departamento").html('<option value="">Carregando....</option>');
-                    $.getJSON('/usuarios/departamentos', {empresa: $(this).val(), ajax: 'true'}, function(j) {
+                    $.getJSON('/ajax/get-departamentos-by-empresa', {empresa: $(this).val(), ajax: 'true'}, function(j) {
                         var options = '<option value="">Todos</option>';
                         for (var i = 0; i < j.length; i++) {
                             options += '<option value="' + j[i].id + '">' + j[i].nome + '</option>';

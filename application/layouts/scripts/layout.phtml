@@ -74,16 +74,13 @@
                                     <br> Solicitações de Serviço
                                 </a>
                             </li>
-
-                            <li>
-                                <a href="/equipamentos">
-                                    <i class="icon-briefcase"></i> 
-                                    <br> Equipamentos
-                                </a>
-                            </li>
                         </ul>
+
                         <ul class="nav pull-right">
-                            <li><a href="/index/configuracoes"><i class="icon-cog"></i> <br> Configurações</a></li>
+                            <?php $storage = new Zend_Auth_Storage_Session('usuario'); ?>
+                            <?php if ($storage->read()->role != 'usuario') : ?>
+                                <li><a href="/index/configuracoes"><i class="icon-cog"></i> <br> Configurações</a></li>
+                            <?php endif; ?>
                             <li><a href="#" target="_blank"><i class="icon-question-sign"></i> <br> Ajuda</a></li>
                             <li class="divider-vertical"></li>
                             <li><a href="/auth/logout"><i class="icon-signout"></i> <br> Sair</a></li>
@@ -103,7 +100,7 @@
             <br/>
             <footer>
                 <hr>
-                © SSI - Vicentinos do Brasil
+                © SSI - Departamento de TI - 2014
             </footer>
         </div>
     </body>

@@ -31,4 +31,11 @@ class AjaxController extends Zend_Controller_Action {
         echo Zend_Json_Encoder::encode($usuarios);
     }
 
+    public function getProcessosAction() {
+        $processo = new Processo();
+        $processos = $processo->fetchAll()->toArray();
+        echo Zend_Json_Encoder::encode($processos);
+    }
+
 }
+
